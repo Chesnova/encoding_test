@@ -1,12 +1,12 @@
-package com.encoding.api;
-
+import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
-public class GetTest {
+import static org.hamcrest.Matchers.is;
+
+public class ApiTestXML {
   @Test
-  public static void testOne(){
-    System.out.println("test");
-    /*Тест 2
+  public void apiTestXml(){
+/*Тест 2
 Отправить 2 варианта GET запроса
 XML: https://status.encoding.com/status.php?format=xml
 JSON: https://status.encoding.com/status.php?format=json
@@ -17,6 +17,9 @@ JSON: https://status.encoding.com/status.php?format=json
 3. Проверить uptime (сек) больше 1 суток
 
 */
-
+    RestAssured.when()
+            .get("https://status.encoding.com/status.php?format=xml")
+            .then().assertThat().statusCode(200);
+            //.then().body("status", is("Ok"));
   }
 }
